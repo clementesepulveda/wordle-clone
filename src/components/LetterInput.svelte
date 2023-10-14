@@ -18,7 +18,7 @@
         border: 1px solid #3A3A3C;
         margin: 0.1rem;
 
-        font-size: 0.7rem;
+        font-size: 0.95rem;
         color: white;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-weight: 1000;

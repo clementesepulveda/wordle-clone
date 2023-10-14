@@ -4,15 +4,16 @@
 
     import { fade, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
-    import Error from '../components/NotEnoughLettersError.svelte'
+    import NotEnoughLettersError from '../components/NotEnoughLettersError.svelte'
     import LetterInput from '../components/LetterInput.svelte';
+    import Answer from '../components/Answer.svelte';
+    import NotRealWordError from '../components/NotRealWordError.svelte';
 
 	let right_word = "";
 	onMount(async () => {
         const res = await fetch("https://random-word-api.herokuapp.com/word?length=5");
 		right_word = await res.json();
         right_word = right_word[0].toUpperCase();
-        console.log(right_word)
 	});
 
     const rows = 6;
@@ -64,15 +65,24 @@
         return code.toLowerCase() != code.toUpperCase() && code.length === 1;
     }
 
-    function isRealWord() {
+    async function isRealWord() {
         if (current_board[current_row].includes("")) {
-            new Error({
+            new NotEnoughLettersError({
                 target: document.getElementById("errors-container")
             })
-            return;
+            return false;
         }
-        // TODO implement
-        return true;
+
+        let res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${current_board[current_row].join("")}`);
+
+        if (res.ok) {
+            return true;
+        } 
+
+        new NotRealWordError({
+            target: document.getElementById("errors-container")
+        })
+        return false;
     }
 
     function GetElementInsideContainer(containerID, childID) {
@@ -88,7 +98,10 @@
     }
 
 	function onKeyDown(e) {
-        console.log(letters_guesses)
+        if (finished) {
+            return;
+        }
+
         if (e.code === "Enter") {
             enterKey();
         } else if (e.code === "Backspace") {
@@ -110,8 +123,13 @@
         current_board[current_row][current_item] = ""
     }
 
-    function enterKey() {
-        if (isRealWord()) {
+    async function enterKey() {
+        if (finished) {
+            return; 
+        }
+
+
+        if (await isRealWord()) {
             for (let i = 0; i < 5; i++) {
                 const container = GetElementInsideContainer(`row-${current_row}`, `item-${i}`)
                 const right_char = right_word[i];
@@ -121,21 +139,46 @@
                     container.classList.add("right-place")
                     letters_guesses[guessed_char] = "right-place"
                 } else if (right_word.includes(guessed_char)) {
-                    container.classList.add("wrong-place")
-                    if (letters_guesses[guessed_char] != "right-place") {
+                    if (must_color_yellow(i)){
+                        container.classList.add("wrong-place")
                         letters_guesses[guessed_char] = "wrong-place"
+                    } else {
+                        container.classList.add("wrong-letter")
+                        letters_guesses[guessed_char] = "wrong-letter"
                     }
                 } else {
                     container.classList.add("wrong-letter")
-                    if (letters_guesses[guessed_char] == "trans-back") {
-                        letters_guesses[guessed_char] = "wrong-letter"
-                    }
+                    letters_guesses[guessed_char] = "wrong-letter"
                 }
             }
             
+            
+            if (current_board[current_row].join("") == right_word) {
+                finishGame();
+            }
+
             current_row += 1;
             current_item = 0;
         }
+        
+        if ( current_row == rows) {
+            finishGame();
+        }
+    }
+
+    function must_color_yellow(idx) { // receives index of letter
+        let count = (right_word.split(current_board[current_row][idx]).length - 1) 
+        for (let j = 0; j < idx; j++) {
+            if (current_board[current_row][j] == current_board[current_row][idx]) {
+                count -= 1;
+            }
+
+            if (count <= 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     function addLetter(letter) {
@@ -150,10 +193,31 @@
         current_item += 1
     }
 
+    function finishGame() {
+        if (finished) {
+            return;
+        }
+
+        finished = true;
+        new Answer({
+            target: document.getElementById("errors-container"),
+            props: {
+                answer: right_word
+            }
+        })
+
+
+    }
+
 </script>
 
 <section id="navbar">
-    Wordle
+    <div id="title">Wordle</div>
+    <span class=reload>
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a href="#" on:click={() => location.reload()}>&#x21bb;</a>
+     </span>
+
 </section>
 
 <section id="errors">
@@ -204,12 +268,27 @@
         color: white;
         height: 4rem;
         border-bottom: 1px solid grey;
-        text-align: center;
         font-size: 3rem;
         line-height: 4rem;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        text-align: center;
+        display: flex;
     }
 
+    #title {
+        flex-grow: 1;
+    }
+
+    .reload {
+        font-family: Lucida Sans Unicode;
+        flex-grow: 0;
+    }
+
+    .reload a {
+        color: white;
+        text-decoration: none;
+    }
     
     #playing-grid {
         padding: 0.6rem;
