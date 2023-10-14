@@ -6,20 +6,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
 		<link href="./_app/immutable/assets/2.c953d836.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.3db17ab0.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.56439963.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.9498ad7e.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0adf3f0e.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.362d2873.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.18129ebf.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.401afd6c.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.513b8a3e.js">
 		<link rel="modulepreload" href="./_app/immutable/nodes/0.4a6ee14d.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.3aa78e85.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.87e1d00e.js">
 	</head>
 	<body data-sveltekit-preload-data="hover" style="margin:0px; padding:0px; background-color: #121213;">
 		<div style="display: contents">  <section id="navbar" class="svelte-jm3mym"><div id="title" class="svelte-jm3mym" data-svelte-h="svelte-11pp5i7">Wordle</div> <span class="reload svelte-jm3mym"> <a href="#" class="svelte-jm3mym" data-svelte-h="svelte-1tjfch7">↻</a></span></section> <section id="errors" class="svelte-jm3mym" data-svelte-h="svelte-wjeacj"><div id="errors-container" class="svelte-jm3mym"></div></section> <section id="playing-grid" class="svelte-jm3mym"><div class="row svelte-jm3mym" id="row-0"><div class="item svelte-jm3mym" id="item-0"></div><div class="item svelte-jm3mym" id="item-1"></div><div class="item svelte-jm3mym" id="item-2"></div><div class="item svelte-jm3mym" id="item-3"></div><div class="item svelte-jm3mym" id="item-4"></div> </div><div class="row svelte-jm3mym" id="row-1"><div class="item svelte-jm3mym" id="item-0"></div><div class="item svelte-jm3mym" id="item-1"></div><div class="item svelte-jm3mym" id="item-2"></div><div class="item svelte-jm3mym" id="item-3"></div><div class="item svelte-jm3mym" id="item-4"></div> </div><div class="row svelte-jm3mym" id="row-2"><div class="item svelte-jm3mym" id="item-0"></div><div class="item svelte-jm3mym" id="item-1"></div><div class="item svelte-jm3mym" id="item-2"></div><div class="item svelte-jm3mym" id="item-3"></div><div class="item svelte-jm3mym" id="item-4"></div> </div><div class="row svelte-jm3mym" id="row-3"><div class="item svelte-jm3mym" id="item-0"></div><div class="item svelte-jm3mym" id="item-1"></div><div class="item svelte-jm3mym" id="item-2"></div><div class="item svelte-jm3mym" id="item-3"></div><div class="item svelte-jm3mym" id="item-4"></div> </div><div class="row svelte-jm3mym" id="row-4"><div class="item svelte-jm3mym" id="item-0"></div><div class="item svelte-jm3mym" id="item-1"></div><div class="item svelte-jm3mym" id="item-2"></div><div class="item svelte-jm3mym" id="item-3"></div><div class="item svelte-jm3mym" id="item-4"></div> </div><div class="row svelte-jm3mym" id="row-5"><div class="item svelte-jm3mym" id="item-0"></div><div class="item svelte-jm3mym" id="item-1"></div><div class="item svelte-jm3mym" id="item-2"></div><div class="item svelte-jm3mym" id="item-3"></div><div class="item svelte-jm3mym" id="item-4"></div> </div></section> <section id="guessed-letters"><div class="guessed-letters-row svelte-jm3mym"><button id="container" class="trans-back svelte-1up36qu">Q</button><button id="container" class="trans-back svelte-1up36qu">W</button><button id="container" class="trans-back svelte-1up36qu">E</button><button id="container" class="trans-back svelte-1up36qu">R</button><button id="container" class="trans-back svelte-1up36qu">T</button><button id="container" class="trans-back svelte-1up36qu">Y</button><button id="container" class="trans-back svelte-1up36qu">U</button><button id="container" class="trans-back svelte-1up36qu">I</button><button id="container" class="trans-back svelte-1up36qu">O</button><button id="container" class="trans-back svelte-1up36qu">P</button></div> <div class="guessed-letters-row svelte-jm3mym"><button id="container" class="trans-back svelte-1up36qu">A</button><button id="container" class="trans-back svelte-1up36qu">S</button><button id="container" class="trans-back svelte-1up36qu">D</button><button id="container" class="trans-back svelte-1up36qu">F</button><button id="container" class="trans-back svelte-1up36qu">G</button><button id="container" class="trans-back svelte-1up36qu">H</button><button id="container" class="trans-back svelte-1up36qu">J</button><button id="container" class="trans-back svelte-1up36qu">K</button><button id="container" class="trans-back svelte-1up36qu">L</button></div> <div class="guessed-letters-row svelte-jm3mym"><button id="container" class="trans-back svelte-1up36qu">ENTER</button> <button id="container" class="trans-back svelte-1up36qu">Z</button><button id="container" class="trans-back svelte-1up36qu">X</button><button id="container" class="trans-back svelte-1up36qu">C</button><button id="container" class="trans-back svelte-1up36qu">V</button><button id="container" class="trans-back svelte-1up36qu">B</button><button id="container" class="trans-back svelte-1up36qu">N</button><button id="container" class="trans-back svelte-1up36qu">M</button> <button id="container" class="trans-back svelte-1up36qu">BACK</button></div></section>    
 			
 			<script>
 				{
-					__sveltekit_12buz05 = {
+					__sveltekit_4v8fhu = {
 						assets: "/sveltekit-github-pages",
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
@@ -30,8 +30,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.3db17ab0.js"),
-						import("./_app/immutable/entry/app.362d2873.js")
+						import("./_app/immutable/entry/start.56439963.js"),
+						import("./_app/immutable/entry/app.401afd6c.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],

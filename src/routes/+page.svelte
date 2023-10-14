@@ -19,6 +19,7 @@
             right_word = right_word[0].toUpperCase();
             res2 = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${right_word}`);
         }
+        console.log(right_word)
         loading_word = false;
 	});
 
@@ -191,6 +192,9 @@
 
     function addLetter(letter) {
         if (current_item > 4) {
+            return;
+        }
+        if (finished) {
             return;
         }
 
