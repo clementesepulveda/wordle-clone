@@ -19,11 +19,12 @@
         height: 3.8rem;
         width: fit-content;
         border: 1px solid #3A3A3C;
+
         padding: 0rem 1rem;
         margin: 0.1rem;
         border-radius: 4px;
 
-        font-size: 0.95rem;
+        font-size: 0.7rem;
         color: white;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
@@ -35,7 +36,7 @@
         text-align: center;
 
         @media (max-width: 500px) {
-            padding: 0rem 0.54rem;
+            padding: 0rem 0.3rem;
             margin: 0.1rem;
         }
     }

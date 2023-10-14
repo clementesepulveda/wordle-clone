@@ -8,6 +8,7 @@
     import LetterInput from '../components/LetterInput.svelte';
     import Answer from '../components/Answer.svelte';
     import NotRealWordError from '../components/NotRealWordError.svelte';
+    import WordyInput from '../components/WordyInput.svelte';
 
 	let right_word = "";
     let loading_word = true;
@@ -19,7 +20,6 @@
             right_word = right_word[0].toUpperCase();
             res2 = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${right_word}`);
         }
-        console.log(right_word)
         loading_word = false;
 	});
 
@@ -150,11 +150,12 @@
                 } else if (right_word.includes(guessed_char)) {
                     if (must_color_yellow(i)){
                         container.classList.add("wrong-place")
-                        letters_guesses[guessed_char] = "wrong-place"
                     } else {
                         container.classList.add("wrong-letter")
-                        letters_guesses[guessed_char] = "wrong-letter"
                     }
+                    if (letters_guesses[guessed_char] != "right-place") {
+                            letters_guesses[guessed_char] = "wrong-place"
+                        }
                 } else {
                     container.classList.add("wrong-letter")
                     letters_guesses[guessed_char] = "wrong-letter"
@@ -259,11 +260,11 @@
         {/each}
     </div>
     <div class="guessed-letters-row">
-        <LetterInput letter="ENTER" onclick={enterKey}/>
+        <WordyInput letter="ENTER" onclick={enterKey}/>
         {#each "ZXCVBNM" as item, i}
             <LetterInput letter={item} state={letters_guesses[item]} onclick={() => addLetter(item)}/>
         {/each}
-        <LetterInput letter="BACK"onclick={eraseCharacter}/>
+        <WordyInput letter="BACK" onclick={eraseCharacter}/>
     </div>
 </section>
 
