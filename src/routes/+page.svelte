@@ -10,10 +10,16 @@
     import NotRealWordError from '../components/NotRealWordError.svelte';
 
 	let right_word = "";
+    let loading_word = true;
 	onMount(async () => {
-        const res = await fetch("https://random-word-api.herokuapp.com/word?length=5");
-		right_word = await res.json();
-        right_word = right_word[0].toUpperCase();
+        let res2 = {};
+        while (!res2.ok) {
+            const res = await fetch("https://random-word-api.herokuapp.com/word?length=5");
+            right_word = await res.json();
+            right_word = right_word[0].toUpperCase();
+            res2 = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${right_word}`);
+        }
+        loading_word = false;
 	});
 
     const rows = 6;
@@ -103,7 +109,9 @@
         }
 
         if (e.code === "Enter") {
-            enterKey();
+            if (!loading_word) {
+                enterKey();
+            }
         } else if (e.code === "Backspace") {
             eraseCharacter();
         } else if (isLetter(e.key)) {
