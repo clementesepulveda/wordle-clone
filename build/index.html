@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link href="./_app/immutable/assets/2.62b2d7f0.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3ef0a18f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.9498ad7e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.38bf8f7e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.d9686821.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.513b8a3e.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.4a6ee14d.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.185ba8ec.js">
+	</head>
+	<body data-sveltekit-preload-data="hover" style="margin:0px; padding:0px; background-color: #121213;">
+		<div style="display: contents">  <section id="navbar" class="svelte-5vsq08" data-svelte-h="svelte-16c02x">Wordle</section> <section id="errors" class="svelte-5vsq08" data-svelte-h="svelte-wjeacj"><div id="errors-container" class="svelte-5vsq08"></div></section> <section id="playing-grid" class="svelte-5vsq08"><div class="row svelte-5vsq08" id="row-0"><div class="item svelte-5vsq08" id="item-0"></div><div class="item svelte-5vsq08" id="item-1"></div><div class="item svelte-5vsq08" id="item-2"></div><div class="item svelte-5vsq08" id="item-3"></div><div class="item svelte-5vsq08" id="item-4"></div> </div><div class="row svelte-5vsq08" id="row-1"><div class="item svelte-5vsq08" id="item-0"></div><div class="item svelte-5vsq08" id="item-1"></div><div class="item svelte-5vsq08" id="item-2"></div><div class="item svelte-5vsq08" id="item-3"></div><div class="item svelte-5vsq08" id="item-4"></div> </div><div class="row svelte-5vsq08" id="row-2"><div class="item svelte-5vsq08" id="item-0"></div><div class="item svelte-5vsq08" id="item-1"></div><div class="item svelte-5vsq08" id="item-2"></div><div class="item svelte-5vsq08" id="item-3"></div><div class="item svelte-5vsq08" id="item-4"></div> </div><div class="row svelte-5vsq08" id="row-3"><div class="item svelte-5vsq08" id="item-0"></div><div class="item svelte-5vsq08" id="item-1"></div><div class="item svelte-5vsq08" id="item-2"></div><div class="item svelte-5vsq08" id="item-3"></div><div class="item svelte-5vsq08" id="item-4"></div> </div><div class="row svelte-5vsq08" id="row-4"><div class="item svelte-5vsq08" id="item-0"></div><div class="item svelte-5vsq08" id="item-1"></div><div class="item svelte-5vsq08" id="item-2"></div><div class="item svelte-5vsq08" id="item-3"></div><div class="item svelte-5vsq08" id="item-4"></div> </div><div class="row svelte-5vsq08" id="row-5"><div class="item svelte-5vsq08" id="item-0"></div><div class="item svelte-5vsq08" id="item-1"></div><div class="item svelte-5vsq08" id="item-2"></div><div class="item svelte-5vsq08" id="item-3"></div><div class="item svelte-5vsq08" id="item-4"></div> </div></section> <section id="guessed-letters"><div class="guessed-letters-row svelte-5vsq08"><button id="container" class="trans-back svelte-1vai7az">Q</button><button id="container" class="trans-back svelte-1vai7az">W</button><button id="container" class="trans-back svelte-1vai7az">E</button><button id="container" class="trans-back svelte-1vai7az">R</button><button id="container" class="trans-back svelte-1vai7az">T</button><button id="container" class="trans-back svelte-1vai7az">Y</button><button id="container" class="trans-back svelte-1vai7az">U</button><button id="container" class="trans-back svelte-1vai7az">I</button><button id="container" class="trans-back svelte-1vai7az">O</button><button id="container" class="trans-back svelte-1vai7az">P</button></div> <div class="guessed-letters-row svelte-5vsq08"><button id="container" class="trans-back svelte-1vai7az">A</button><button id="container" class="trans-back svelte-1vai7az">S</button><button id="container" class="trans-back svelte-1vai7az">D</button><button id="container" class="trans-back svelte-1vai7az">F</button><button id="container" class="trans-back svelte-1vai7az">G</button><button id="container" class="trans-back svelte-1vai7az">H</button><button id="container" class="trans-back svelte-1vai7az">J</button><button id="container" class="trans-back svelte-1vai7az">K</button><button id="container" class="trans-back svelte-1vai7az">L</button></div> <div class="guessed-letters-row svelte-5vsq08"><button id="container" class="trans-back svelte-1vai7az">ENTER</button> <button id="container" class="trans-back svelte-1vai7az">Z</button><button id="container" class="trans-back svelte-1vai7az">X</button><button id="container" class="trans-back svelte-1vai7az">C</button><button id="container" class="trans-back svelte-1vai7az">V</button><button id="container" class="trans-back svelte-1vai7az">B</button><button id="container" class="trans-back svelte-1vai7az">N</button><button id="container" class="trans-back svelte-1vai7az">M</button> <button id="container" class="trans-back svelte-1vai7az">BACK</button></div></section>    
+			
+			<script>
+				{
+					__sveltekit_nvrbcq = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.3ef0a18f.js"),
+						import("./_app/immutable/entry/app.d9686821.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
