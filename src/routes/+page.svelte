@@ -98,6 +98,7 @@
             return true;
         } 
 
+        anims[`anim${current_row+1}`].triggerAnimation('shake')
         new NotRealWordError({
             target: document.getElementById("errors-container")
         })
