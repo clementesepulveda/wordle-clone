@@ -305,19 +305,22 @@
 
 </script>
 
-<section id="navbar">
-    <div id="title">Wordle</div>
-    <span class=reload>
-        <!-- svelte-ignore a11y-invalid-attribute -->
-        <a href="#" on:click={() => location.reload()}>&#x21bb;</a>
-     </span>
-
-</section>
-
 <section id="errors">
     <div id="errors-container">
     </div>
 </section>
+
+<section id="navbar">
+    <div id="title">Wordle</div>
+    {#if finished}
+        <span class=reload>
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a href="#" on:click={() => location.reload()}>&#x21bb;</a>
+        </span>
+    {/if}
+
+</section>
+
 
 <section id="playing-grid">
     {#each Array(rows) as input, j}
@@ -362,17 +365,24 @@
         line-height: 4rem;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
-        text-align: center;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr repeat(1, auto) 1fr;
+        grid-column-gap: 5px;
+        justify-items: center;
+        padding:0; 
+        margin: 0; 
+        list-style: none;
     }
 
     #title {
-        flex-grow: 1;
+        grid-column-start: 2;
+
     }
 
     .reload {
         font-family: Lucida Sans Unicode;
-        flex-grow: 0;
+        margin-left: auto;
+        padding-right: 1rem;
     }
 
     .reload a {
@@ -407,6 +417,7 @@
     }
 
     #errors-container {
+        padding-top: 1.5rem;
         position: absolute;
     }
 
