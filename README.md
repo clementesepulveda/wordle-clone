@@ -9,12 +9,11 @@ Have been playing Wordle for quite a long time, so I wanted to see if I could re
 1. It uses a random word generator API to generate the answers, so some words are pretty tricky to get. It could use a more curated list of words.
 2. It uses another API to check if guessed words are actual words. No problem in this, but I could problably install a dependency so it could be used offline. 
 3. The 2 APIs used (random word generator and the words checker) for some reason don't align perfectly 100%, so you might get a random word that the word checker thinks is not a real word. I just kept generating answers until I get a word that returns `true` by the word checker, but it would be fixed by using a better answer pool.
-4. Still needs animation. 
-5. Doesn't keep track of your score or statistics. 
-6. Doesn't have a analysis bot. That sounds pretty complex compared to the actual game. 
-7. Share button. It's a minor thing, but I think it's pretty neat.
-8. No how to play screen.
-9. No differentt settings (like changing theme, hard mode, high contrast mode)
+4. Doesn't keep track of your score or statistics. 
+5. Doesn't have a analysis bot. That sounds pretty complex compared to the actual game. 
+6. Share button. It's a minor thing, but I think it's pretty neat.
+7. No how to play screen.
+8. No differentt settings (like changing theme, hard mode, high contrast mode)
 
 
 

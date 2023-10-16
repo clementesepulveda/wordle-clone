@@ -208,7 +208,6 @@
         fillingRow = true;
         if (await isRealWord()) {
             for (let i = 0; i < 5; i++) {
-                // FLIP 180 degrees
                 cellAnimators[current_row][i].triggerAnimation('rotate');
                 await sleep(200); // Adjust animationDuration to the actual duration of the animation
 
@@ -233,8 +232,6 @@
                     letters_guesses[guessed_char] = "wrong-letter"
                 }
                 
-
-                // FLIP 180 degrees
                 cellAnimators[current_row][i].triggerAnimation('rotateBack');
                 await sleep(200); // Adjust animationDuration to the actual duration of the animation
 
