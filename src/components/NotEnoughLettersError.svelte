@@ -18,7 +18,7 @@
 {#if getSelfRef}
 	<svelte:self bind:this={self} getSelfRef={false}/>
 {:else}
-	<div class="error">
+	<div class="error" out:fade>
 		Not enough letters
 	</div>
 {/if}

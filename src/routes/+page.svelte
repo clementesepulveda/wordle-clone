@@ -8,18 +8,64 @@
     import Answer from '../components/Answer.svelte';
     import NotRealWordError from '../components/NotRealWordError.svelte';
     import WordyInput from '../components/WordyInput.svelte';
+    // import WordleLetter from '../components/WordleLetter.svelte';
+    import WordleRow from '../components/WordleRow.svelte';
 
     // TODO make this more beautiful
     import { createAnimationTriggerAction } from 'svelte-trigger-action';
-    const anims = {
-        "anim1": createAnimationTriggerAction(),
-        "anim2": createAnimationTriggerAction(),
-        "anim3": createAnimationTriggerAction(),
-        "anim4": createAnimationTriggerAction(),
-        "anim5": createAnimationTriggerAction(),
-        "anim6": createAnimationTriggerAction(),
-    }
-    
+
+    const cellAnimators = [
+        [
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+        ],
+        [
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+        ],
+        [
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+        ],
+        [
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+        ],
+        [
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+        ],
+        [
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+            createAnimationTriggerAction(),
+        ],
+    ]
+    const rowAnimators = [
+        createAnimationTriggerAction(),
+        createAnimationTriggerAction(),
+        createAnimationTriggerAction(),
+        createAnimationTriggerAction(),
+        createAnimationTriggerAction(),
+        createAnimationTriggerAction(),
+    ]
     
 	let right_word = "";
     let loading_word = true;
@@ -85,7 +131,7 @@
 
     async function isRealWord() {
         if (current_board[current_row].includes("")) {
-            anims[`anim${current_row+1}`].triggerAnimation('shake')
+            rowAnimators[current_row].triggerAnimation('shake')
             new NotEnoughLettersError({
                 target: document.getElementById("errors-container")
             })
@@ -98,7 +144,7 @@
             return true;
         } 
 
-        anims[`anim${current_row+1}`].triggerAnimation('shake')
+        rowAnimators[current_row].triggerAnimation('shake')
         new NotRealWordError({
             target: document.getElementById("errors-container")
         })
@@ -145,14 +191,20 @@
         current_board[current_row][current_item] = ""
     }
 
+    async function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     async function enterKey() {
         if (finished) {
             return; 
         }
-
-
         if (await isRealWord()) {
             for (let i = 0; i < 5; i++) {
+                // FLIP 180 degrees
+                cellAnimators[current_row][i].triggerAnimation('rotate');
+                await sleep(200); // Adjust animationDuration to the actual duration of the animation
+
                 const container = GetElementInsideContainer(`row-${current_row}`, `item-${i}`)
                 const right_char = right_word[i];
                 const guessed_char = current_board[current_row][i];
@@ -173,6 +225,12 @@
                     container.classList.add("wrong-letter")
                     letters_guesses[guessed_char] = "wrong-letter"
                 }
+                
+
+                // FLIP 180 degrees
+                cellAnimators[current_row][i].triggerAnimation('rotateBack');
+                await sleep(200); // Adjust animationDuration to the actual duration of the animation
+
             }
             
             
@@ -212,6 +270,7 @@
             return;
         }
 
+        cellAnimators[current_row][current_item].triggerAnimation('pop')
         const container = GetElementInsideContainer(`row-${current_row}`, `item-${current_item}`)
         container.textContent = letter
 
@@ -252,38 +311,9 @@
 </section>
 
 <section id="playing-grid">
-    <!-- {#each Array(rows) as input, j} -->
-        <div class="row" id="row-0"  use:anims.anim1.animationAction>
-            {#each Array(word_length) as input, i}
-                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[0][i]}</div>
-            {/each}
-        </div>
-        <div class="row" id="row-1"  use:anims.anim2.animationAction>
-            {#each Array(word_length) as input, i}
-                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[1][i]}</div>
-            {/each}
-        </div>
-        <div class="row" id="row-2"  use:anims.anim3.animationAction>
-            {#each Array(word_length) as input, i}
-                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[2][i]}</div>
-            {/each}
-        </div>
-        <div class="row" id="row-3"  use:anims.anim4.animationAction>
-            {#each Array(word_length) as input, i}
-                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[3][i]}</div>
-            {/each}
-        </div>
-        <div class="row" id="row-4"  use:anims.anim5.animationAction>
-            {#each Array(word_length) as input, i}
-                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[4][i]}</div>
-            {/each}
-        </div>
-        <div class="row" id="row-5"  use:anims.anim6.animationAction>
-            {#each Array(word_length) as input, i}
-                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[5][i]}</div>
-            {/each}
-        </div>
-    <!-- {/each} -->
+    {#each Array(rows) as input, j}
+        <WordleRow row={j} rowLetters={current_board[j]} rowAnimator={rowAnimators[j].animationAction} cellAnimators={cellAnimators[j]}/>
+    {/each}
 </section>
 
 <section id="guessed-letters">
@@ -343,39 +373,22 @@
     
     #playing-grid {
         padding: 0.6rem;
-        /* background-color: blue; */
-    }
-
-    .row {
-        /* background-color: red; */
-        display: flex;
-        justify-content: center;
-        z-index: -2; /* Adjusted z-index */
-    }
-
-    .item {
-        width: 3.8rem;
-        height: 3.8rem;
-        border: 1px solid #3A3A3C;
-        margin: 0.1rem;
-
-        font-size: xx-large;
-        color: white;
-        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-weight: 1000;
-
-        line-height: 3.8rem;
-        text-align: center;
     }
     
+    :global(.item) {
+        border: 3px solid #3A3A3C;
+    }
     :global(.wrong-place) {
         background-color: #B59F3B;
+        border: 3px solid transparent;
     }
     :global(.wrong-letter) {
         background-color: #3A3A3C;
+        border: 3px solid transparent;
     }
     :global(.right-place) {
         background-color: #538D4E;
+        border: 3px solid transparent;
     }
 
     #errors {
@@ -418,5 +431,22 @@
     40%, 60% {
         transform: translate3d(4px, 0, 0);
     }
+    }
+
+    :global(.pop) {
+        animation: pop 0.1s linear 1;
+    }
+
+    @keyframes pop {
+    50%  {transform: scale(1.2);}
+    }
+
+    :global(.rotate) {
+        transition: transform 0.4s;
+        transform: rotateX(90deg);
+    }
+    :global(.rotateBack) {
+        transition: transform 0.4s;
+        transform: rotateX(0deg);
     }
 </style>
