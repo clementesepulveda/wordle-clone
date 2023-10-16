@@ -66,6 +66,8 @@
         createAnimationTriggerAction(),
         createAnimationTriggerAction(),
     ]
+
+    let fillingRow = false;
     
 	let right_word = "";
     let loading_word = true;
@@ -199,6 +201,11 @@
         if (finished) {
             return; 
         }
+        if (fillingRow) {
+            return;
+        }
+
+        fillingRow = true;
         if (await isRealWord()) {
             for (let i = 0; i < 5; i++) {
                 // FLIP 180 degrees
@@ -245,6 +252,8 @@
         if ( current_row == rows) {
             finishGame();
         }
+        
+        fillingRow = false;
     }
 
     function must_color_yellow(idx) { // receives index of letter
@@ -412,7 +421,7 @@
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         perspective: 1000px;
-        z-index: -1; /* Adjusted z-index */
+        z-index: -1;
     }
 
     @keyframes shake {
@@ -435,6 +444,7 @@
 
     :global(.pop) {
         animation: pop 0.1s linear 1;
+        z-index: -1;
     }
 
     @keyframes pop {
@@ -444,9 +454,11 @@
     :global(.rotate) {
         transition: transform 0.4s;
         transform: rotateX(90deg);
+        z-index: -1;
     }
     :global(.rotateBack) {
         transition: transform 0.4s;
         transform: rotateX(0deg);
+        z-index: -1;
     }
 </style>
