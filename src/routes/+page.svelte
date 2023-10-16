@@ -1,7 +1,6 @@
 <script>
     // TODO you are evading the error
     // @ts-nocheck
-
     import { fade, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
     import NotEnoughLettersError from '../components/NotEnoughLettersError.svelte'
@@ -10,6 +9,18 @@
     import NotRealWordError from '../components/NotRealWordError.svelte';
     import WordyInput from '../components/WordyInput.svelte';
 
+    // TODO make this more beautiful
+    import { createAnimationTriggerAction } from 'svelte-trigger-action';
+    const anims = {
+        "anim1": createAnimationTriggerAction(),
+        "anim2": createAnimationTriggerAction(),
+        "anim3": createAnimationTriggerAction(),
+        "anim4": createAnimationTriggerAction(),
+        "anim5": createAnimationTriggerAction(),
+        "anim6": createAnimationTriggerAction(),
+    }
+    
+    
 	let right_word = "";
     let loading_word = true;
 	onMount(async () => {
@@ -74,6 +85,7 @@
 
     async function isRealWord() {
         if (current_board[current_row].includes("")) {
+            anims[`anim${current_row+1}`].triggerAnimation('shake')
             new NotEnoughLettersError({
                 target: document.getElementById("errors-container")
             })
@@ -239,13 +251,38 @@
 </section>
 
 <section id="playing-grid">
-    {#each Array(rows) as input, j}
-          <div class="row" id="row-{j}">
+    <!-- {#each Array(rows) as input, j} -->
+        <div class="row" id="row-0"  use:anims.anim1.animationAction>
             {#each Array(word_length) as input, i}
-              <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[j][i]}</div>
+                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[0][i]}</div>
             {/each}
-          </div>
-    {/each}
+        </div>
+        <div class="row" id="row-1"  use:anims.anim2.animationAction>
+            {#each Array(word_length) as input, i}
+                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[1][i]}</div>
+            {/each}
+        </div>
+        <div class="row" id="row-2"  use:anims.anim3.animationAction>
+            {#each Array(word_length) as input, i}
+                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[2][i]}</div>
+            {/each}
+        </div>
+        <div class="row" id="row-3"  use:anims.anim4.animationAction>
+            {#each Array(word_length) as input, i}
+                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[3][i]}</div>
+            {/each}
+        </div>
+        <div class="row" id="row-4"  use:anims.anim5.animationAction>
+            {#each Array(word_length) as input, i}
+                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[4][i]}</div>
+            {/each}
+        </div>
+        <div class="row" id="row-5"  use:anims.anim6.animationAction>
+            {#each Array(word_length) as input, i}
+                <div class="item" id=item-{i} transition:fade={{ delay: 250, duration: 300 }}>{current_board[5][i]}</div>
+            {/each}
+        </div>
+    <!-- {/each} -->
 </section>
 
 <section id="guessed-letters">
@@ -312,6 +349,7 @@
         /* background-color: red; */
         display: flex;
         justify-content: center;
+        z-index: -2; /* Adjusted z-index */
     }
 
     .item {
@@ -342,8 +380,7 @@
     #errors {
         display: flex;
         justify-content: center;
-
-
+        z-index: 50;
     }
 
     #errors-container {
@@ -353,5 +390,32 @@
     .guessed-letters-row {
         display: flex;
         justify-content: center;
+    }
+
+    :global(.shake) {
+        position: relative;
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+        z-index: -1; /* Adjusted z-index */
+    }
+
+    @keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
     }
 </style>

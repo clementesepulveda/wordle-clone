@@ -15,9 +15,9 @@
         color: white;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         
-        /* width: 3.3rem; */
+        width: 3.3rem;
         height: 3.8rem;
-        width: fit-content;
+
         border: 1px solid #3A3A3C;
         padding: 0rem 1rem;
         margin: 0.1rem;
@@ -35,6 +35,7 @@
         text-align: center;
 
         @media (max-width: 500px) {
+            width: 2rem;
             padding: 0rem 0.54rem;
             margin: 0.1rem;
         }

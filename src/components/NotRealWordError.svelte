@@ -34,6 +34,7 @@
         border-radius: 0.2rem;
 
         margin: 1rem;
+        z-index: 50;
 
         font-size: small;
         color:black;    
