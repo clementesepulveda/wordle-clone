@@ -13,7 +13,8 @@ Have been playing Wordle for quite a long time, so I wanted to see if I could re
 5. Doesn't have a analysis bot. That sounds pretty complex compared to the actual game. 
 6. Share button. It's a minor thing, but I think it's pretty neat.
 7. No how to play screen.
-8. No differentt settings (like changing theme, hard mode, high contrast mode)
+8. Differentt settings (like changing theme, hard mode, high contrast mode)
+9. Different sized words and guesses (it's almost there).
 
 
 
